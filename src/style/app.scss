@@ -1,0 +1,74 @@
+@import "reset.scss";
+@import "typography.scss";
+
+$hover-white: #eeeeee;
+$white: #e0e0e0;
+$off-white: #bdbdbd;
+$light-grey: #999999;
+$grey: #757575;
+$dark-grey: #4a4a4a;
+$near-black: #262626;
+
+.white {
+  color: $white;
+}
+
+.off-white {
+  color: $off-white;
+}
+
+.grey {
+  color: $grey;
+}
+
+.light-grey {
+  color: $light-grey;
+}
+
+body {
+  background-color: black;
+  font-family: "Libre Franklin", sans-serif;
+  color: $white;
+}
+
+.fader-appear,
+.photo-appear,
+.image,
+.filter-fader {
+  opacity: 0;
+}
+
+.image-loaded {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fader-appear-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in 300ms;
+}
+
+.photo-appear-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in 300ms;
+}
+
+.filter-fader-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in 1200ms;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.logo {
+  max-width: 180px;
+  display: flex;
+}
+
+li,
+a {
+  cursor: pointer;
+}
