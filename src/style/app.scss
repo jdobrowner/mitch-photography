@@ -1,34 +1,20 @@
-@import "reset.scss";
-@import "typography.scss";
+@use "reset.scss";
+@use "typography.scss";
 
-$hover-white: #eeeeee;
-$white: #e0e0e0;
-$off-white: #bdbdbd;
-$light-grey: #999999;
-$grey: #757575;
-$dark-grey: #4a4a4a;
-$near-black: #262626;
-
-.white {
-  color: $white;
-}
-
-.off-white {
-  color: $off-white;
-}
-
-.grey {
-  color: $grey;
-}
-
-.light-grey {
-  color: $light-grey;
+:root {
+  --hover-white: #eeeeee;
+  --white: #e0e0e0;
+  --off-white: #bdbdbd;
+  --light-grey: #999999;
+  --grey: #757575;
+  --dark-grey: #4a4a4a;
+  --near-black: #262626;
 }
 
 body {
   background-color: black;
   font-family: "Libre Franklin", sans-serif;
-  color: $white;
+  color: var(--white);
 }
 
 .fader-appear,
@@ -71,4 +57,23 @@ body {
 li,
 a {
   cursor: pointer;
+}
+
+.col-7 {
+  width: calc(100vw / 12 * 7);
+}
+.col-8 {
+  width: calc(100vw / 12 * 8);
+}
+.col-9 {
+  width: calc(100vw / 12 * 9);
+}
+.col-10 {
+  width: calc(100vw / 12 * 10);
+}
+.col-11 {
+  width: calc(100vw / 12 * 11);
+}
+.col-12 {
+  width: 100vw;
 }
