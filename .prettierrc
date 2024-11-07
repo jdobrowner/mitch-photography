@@ -2,7 +2,7 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "svelteSortOrder": "scripts-styles-markup",
-  "svelteStrictMode": true,
+  "svelteStrictMode": false,
   "svelteBracketNewLine": true,
   "svelteAllowShorthand": true
 }
