@@ -4,6 +4,7 @@
   // import Home from './Home.svelte';
   // import Photo from './Photo.svelte';
   import DropdownMenu from './components/DropdownMenu.svelte';
+  import SidebarMenu from './components/SidebarMenu.svelte';
   // import Sidebar from './Sidebar.svelte';
 
   let photos = [];
@@ -56,7 +57,7 @@
 <Router>
   <div class="app">
     <div>
-      <Link to="/" class="logo col-7">
+      <Link to="/" class="title col-7">
         <!-- <img src={Logo} /> -->
         <div>
           <h1 class="mitch-dobrowner">Mitch Dobrowner</h1>
@@ -64,6 +65,7 @@
         </div>
       </Link>
       <DropdownMenu />
+      <SidebarMenu />
       <!-- <Sidebar {photos} /> -->
 
       <div class="routes">
