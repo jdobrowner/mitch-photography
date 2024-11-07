@@ -1,5 +1,5 @@
-@use "reset.scss";
-@use "typography.scss";
+@use 'reset.scss';
+@use 'typography.scss';
 
 :root {
   --hover-white: #eeeeee;
@@ -9,11 +9,14 @@
   --grey: #757575;
   --dark-grey: #4a4a4a;
   --near-black: #262626;
+  --near-black-border: #212121;
+
+  --col-1-width: calc(100vw / 12);
 }
 
 body {
   background-color: black;
-  font-family: "Libre Franklin", sans-serif;
+  font-family: 'Libre Franklin', sans-serif;
   color: var(--white);
 }
 

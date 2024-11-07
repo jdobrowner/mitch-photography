@@ -3,6 +3,7 @@
   import { Link } from 'svelte-routing';
   import { get, writable } from 'svelte/store';
   import CloseArrow from './CloseArrow.svelte';
+  import DropdownMenuItem from './DropdownMenuItem.svelte';
   //   import { photos, currentPage, redirect } from '../stores'; // Assuming you have these stores
 
   //   import resetCategory from '../actions/reset-category.action';
@@ -11,82 +12,26 @@
   //   import setCurrentPage from '../actions/current-page.action';
   //   import redirectAction from '../actions/redirect.action';
 
-  const nearBlack = '#212121';
-  const grey = '#757575';
-  const offWhite = '#BDBDBD';
-  const menuStyling = {
-    dropdownClosed: {
-      maxHeight: '0',
-      overflow: 'hidden',
-      borderBottom: '1px solid black',
-    },
-    dropdownOpen: {
-      maxHeight: '800px',
-      borderBottom: '1px solid ' + nearBlack,
-    },
-    liClosed: {
-      color: 'transparent',
-      transition: 'color 1s ease ',
-      textAlign: 'right',
-      margin: '30px 0',
-    },
-    liOpen: {
-      color: grey,
-      transition: 'color 1s ease .6s',
-      textAlign: 'right',
-      margin: '30px 0',
-      cursor: 'pointer',
-    },
-    svgClosed: {
-      strokeOpacity: '0',
-      transition: 'all 1s ease',
-    },
-    svgOpen: {
-      strokeOpacity: '1',
-      transition: 'all 1s ease .4s',
-    },
+  let menuClicked = false;
+  let menuTimeout = false;
+  let isMenuOpen = false;
+  $: {
+    isMenuOpen = menuClicked && !menuTimeout;
+  }
+
+  const menuClickedHandler = () => {
+    menuClicked = true;
   };
 
-  let openMenu = false;
-  let menuTimeout = false;
+  const closeMenuHandler = () => {
+    menuClicked = false;
+  };
 
-  function openMenuHandler() {
-    openMenu = true;
-  }
-
-  function closeMenuHandler() {
-    openMenu = false;
-  }
-
-  function menuTimeoutHandler() {
+  const menuTimeoutHandler = () => {
     setTimeout(() => {
       menuTimeout = false;
     }, 1500);
-  }
-
-  function isMenuOpen() {
-    return openMenu && !menuTimeout;
-  }
-
-  function menuStyle() {
-    // return isMenuOpen() ? menuStyling.dropdownOpen : menuStyling.dropdownClosed;
-  }
-
-  function liStyle(page = '') {
-    //   if (isMenuOpen()) {
-    //     if (get(currentPage) === page) {
-    //       return { ...menuStyling.liOpen, color: offWhite };
-    //     } else {
-    //       return menuStyling.liOpen;
-    //     }
-    //   } else {
-    //     return menuStyling.liClosed;
-    //   }
-  }
-
-  function svgStyle() {
-    return isMenuOpen() ? menuStyling.svgOpen : menuStyling.svgClosed;
-  }
+  };
 
   //   function getLinkSlug(category) {
   //     let linkSlug;
@@ -118,74 +63,152 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  .dropdown-menu {
+    position: absolute;
+    top: var(--col-1-width);
+    right: var(--col-1-width);
+    padding-top: 10px;
+  }
+  h4 {
+    text-align: right;
+    cursor: pointer;
+    display: block;
+  }
+  .close-menu {
+    display: flex;
+    justify-content: center;
+    transform: scale(0.4);
+    cursor: pointer;
+  }
+  .close-menu:hover #arrow {
+    stroke: var(--hover-white);
+  }
+  .menu-images {
+    margin: 60px var(--col-1-width);
+  }
+  .menu-info {
+    margin: 0 var(--col-1-width) 35px var(--col-1-width);
+  }
+  .dropdown {
+    position: absolute;
+    background-color: black;
+    z-index: 10;
+    top: calc(-1 * var(--col-1-width));
+    right: calc(-1 * var(--col-1-width));
+    transition:
+      max-height 1s ease 0.2s,
+      border 0.5s ease 0.2s;
+  }
   .dropdownClosed {
     max-height: 0;
     overflow: hidden;
     border-bottom: 1px solid black;
   }
-
   .dropdownOpen {
     max-height: 800px;
-    border-bottom: 1px solid #212121;
+    border-bottom: 1px solid var(--near-black-border);
   }
-
   .liClosed {
     color: transparent;
     transition: color 1s ease;
     text-align: right;
     margin: 30px 0;
   }
-
   .liOpen {
-    color: #757575;
+    color: var(--grey);
     transition: color 1s ease 0.6s;
     text-align: right;
     margin: 30px 0;
     cursor: pointer;
   }
+  .svgClosed {
+    stroke-opacity: 0;
+    transition: all 1s ease;
+  }
+  .svgOpen {
+    stroke-opacity: 1;
+    transition: all 1s ease 0.4s;
+  }
+
+  @media (min-width: 500px) {
+    .dropdown-menu {
+      .menu-images {
+        margin-top: calc(100vw / 8);
+      }
+    }
+  }
+  @media (min-width: 600px) {
+    .dropdown-menu {
+      top: 50px;
+    }
+  }
+  @media (min-width: 750px) {
+    .dropdown-menu {
+      .menu-images {
+        margin-top: calc(100vw / 9);
+      }
+    }
+  }
+  @media (min-width: 1025px) {
+    .dropdown-menu {
+      display: none;
+    }
+  }
 </style>
 
 <div class="dropdown-menu">
-  <h4 on:click="{openMenuHandler}" on:mouseenter="{openMenuHandler}">MENU</h4>
+  <h4 on:click={menuClickedHandler} on:mouseenter={menuClickedHandler}>MENU</h4>
   <nav
     class="col-12 dropdown"
-    style="{menuStyle()}"
-    on:mouseleave="{closeMenuHandler}"
+    class:dropdownOpen={isMenuOpen}
+    class:dropdownClosed={!isMenuOpen}
+    on:mouseleave={closeMenuHandler}
   >
     <ul class="menu-images">
-      <li style="{liStyle('recent')}" on:click="{() => handleClick('recent')}">
-        RECENT
-      </li>
-      <li style="{liStyle('storms')}" on:click="{() => handleClick('storms')}">
-        STORMS
-      </li>
-      <li
-        style="{liStyle('landscapes')}"
-        on:click="{() => handleClick('landscapes')}"
-      >
-        LANDSCAPES
-      </li>
-      <li style="{liStyle('urban')}" on:click="{() => handleClick('urban')}">
-        URBAN
-      </li>
-      <li style="{liStyle('trees')}" on:click="{() => handleClick('trees')}">
-        TREES
-      </li>
+      <DropdownMenuItem
+        title="recent"
+        isOpen={isMenuOpen}
+        onClick={() => handleClick('recent')}
+      />
+      <DropdownMenuItem
+        title="storms"
+        isOpen={isMenuOpen}
+        onClick={() => handleClick('storms')}
+      />
+      <DropdownMenuItem
+        title="landscapes"
+        isOpen={isMenuOpen}
+        onClick={() => handleClick('landscapes')}
+      />
+      <DropdownMenuItem
+        title="urban"
+        isOpen={isMenuOpen}
+        onClick={() => handleClick('urban')}
+      />
+      <DropdownMenuItem
+        title="trees"
+        isOpen={isMenuOpen}
+        onClick={() => handleClick('trees')}
+      />
     </ul>
     <ul class="menu-info">
       <Link to="/biography"
-        ><li style="{liStyle('bio')}" on:click="{() => handleClick('bio')}">
-          BIOGRAPHY
-        </li></Link
+        ><DropdownMenuItem
+          title="biography"
+          isOpen={isMenuOpen}
+          onClick={() => handleClick('biography')}
+        /></Link
       >
       <Link to="/information"
-        ><li style="{liStyle('info')}" on:click="{() => handleClick('info')}">
-          INFORMATION
-        </li></Link
+        ><DropdownMenuItem
+          title="information"
+          isOpen={isMenuOpen}
+          onClick={() => handleClick('information')}
+        /></Link
       >
-      <div on:click="{closeMenuHandler}" class="close-menu">
-        <CloseArrow isOpen="{openMenu}" />
+      <div on:click={closeMenuHandler} class="close-menu">
+        <CloseArrow isOpen={menuClicked} />
       </div>
     </ul>
   </nav>
