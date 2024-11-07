@@ -3,7 +3,7 @@
   import { Link } from 'svelte-routing';
   import { get, writable } from 'svelte/store';
   import CloseArrow from './CloseArrow.svelte';
-  import DropdownMenuItem from './DropdownMenuItem.svelte';
+  import MenuItem from './MenuItem.svelte';
   //   import { photos, currentPage, redirect } from '../stores'; // Assuming you have these stores
 
   //   import resetCategory from '../actions/reset-category.action';
@@ -166,45 +166,52 @@
     on:mouseleave={closeMenuHandler}
   >
     <ul class="menu-images">
-      <DropdownMenuItem
+      <MenuItem
         title="recent"
         isOpen={isMenuOpen}
         onClick={() => handleClick('recent')}
+        dropdown={true}
       />
-      <DropdownMenuItem
+      <MenuItem
         title="storms"
         isOpen={isMenuOpen}
         onClick={() => handleClick('storms')}
+        dropdown={true}
       />
-      <DropdownMenuItem
+      <MenuItem
         title="landscapes"
         isOpen={isMenuOpen}
         onClick={() => handleClick('landscapes')}
+        dropdown={true}
       />
-      <DropdownMenuItem
+      <MenuItem
         title="urban"
         isOpen={isMenuOpen}
         onClick={() => handleClick('urban')}
+        dropdown={true}
       />
-      <DropdownMenuItem
+      <MenuItem
         title="trees"
         isOpen={isMenuOpen}
         onClick={() => handleClick('trees')}
+        dropdown={true}
       />
     </ul>
     <ul class="menu-info">
       <Link to="/biography"
-        ><DropdownMenuItem
+        ><MenuItem
           title="biography"
           isOpen={isMenuOpen}
           onClick={() => handleClick('biography')}
+          dropdown={true}
         /></Link
       >
       <Link to="/information"
-        ><DropdownMenuItem
+        ><MenuItem
           title="information"
           isOpen={isMenuOpen}
           onClick={() => handleClick('information')}
+          dropdown={true}
         /></Link
       >
       <div on:click={closeMenuHandler} class="close-menu">
