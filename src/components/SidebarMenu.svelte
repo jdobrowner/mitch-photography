@@ -12,7 +12,7 @@
   //   import setCurrentPage from '../actions/current-page.action';
   //   import redirectAction from '../actions/redirect.action';
 
-  let menuClicked = true;
+  let menuClicked = false;
   let menuTimeout = false;
   let isMenuOpen = false;
   let contactOpen = false;
@@ -25,8 +25,8 @@
   };
 
   const closeMenuHandler = () => {
-    // menuClicked = false;
-    // contactOpen = false;
+    menuClicked = false;
+    contactOpen = false;
   };
 
   const menuTimeoutHandler = () => {
