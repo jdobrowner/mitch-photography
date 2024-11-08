@@ -54,6 +54,7 @@ function parseContentfulResponse(
         quote: item.fields.quote,
         quoteAuthor: item.fields.quoteAuthor,
         quoteDate: item.fields.quoteDate,
+        imageUrl: item.fields.coverImage.fields.file.url,
       };
       homePageContents.push(parsedItem);
     } else if (item.sys.contentType?.sys.id === 'publication') {
@@ -78,6 +79,7 @@ function parseContentfulResponse(
         priority: item.fields.priority,
         addToRecent: item.fields.addToRecent,
         recentPriority: item.fields.recentPriority,
+        imageUrl: item.fields.image.fields.file.url,
       };
       photographs.push(parsedItem);
     } else if (item.sys.contentType?.sys.id === 'exhibition') {

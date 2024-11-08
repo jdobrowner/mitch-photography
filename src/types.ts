@@ -35,6 +35,7 @@ export interface HomePageContent {
   quote: string;
   quoteAuthor: string;
   quoteDate: string;
+  imageUrl: string;
 }
 
 export interface Publication {
@@ -57,6 +58,7 @@ export interface Photograph {
   priority: number;
   addToRecent: boolean;
   recentPriority: number;
+  imageUrl: string;
 }
 
 export interface Exhibition {

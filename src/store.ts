@@ -21,6 +21,10 @@ export const treesPhotographsStore = writable<Photograph[]>([]);
 export const archivePhotographsStore = writable<Photograph[]>([]);
 
 // Create derived stores to return the first photograph of each photograph type
+export const homePagePhotograph = derived(
+  archivePhotographsStore,
+  ($archivePhotographsStore) => $archivePhotographsStore[0]
+);
 export const firstRecentPhotograph = derived(
   recentPhotographsStore,
   ($recentPhotographsStore) => $recentPhotographsStore[0]
