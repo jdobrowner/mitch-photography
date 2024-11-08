@@ -1,10 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { Link, Route, Router } from 'svelte-routing';
-  // import Home from './Home.svelte';
+  import Home from './pages/Home.svelte';
   // import Photo from './Photo.svelte';
   import DropdownMenu from './components/DropdownMenu.svelte';
   import SidebarMenu from './components/SidebarMenu.svelte';
+  import { client, getEntries } from './util';
   // import Sidebar from './Sidebar.svelte';
 
   let photos = [];
@@ -17,6 +18,7 @@
     //   const url = '/' + photo.slug;
     //   return { url, photo };
     // });
+    getEntries();
   });
 
   // function photoComponent(photo) {
@@ -69,7 +71,7 @@
       <!-- <Sidebar {photos} /> -->
 
       <div class="routes">
-        <!-- <Route path="/" component={Home} /> -->
+        <Route path="/" component={Home} />
         <!-- {#each photoRoutes as { url, photo }}
           <Route path={url} component={photoComponent(photo)} />
         {/each}
